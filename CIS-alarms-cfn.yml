@@ -37,11 +37,11 @@ Resources:
     Type: AWS::Logs::MetricFilter
     Properties:
       LogGroupName: !Ref CloudtrailLogGroupName
-      FilterPattern: |-
+      FilterPattern: '
         {
           ($.errorCode = "*UnauthorizedOperation") ||
           ($.errorCode = "AccessDenied*")
-        }
+        }'
       MetricTransformations:
       - MetricValue: '1'
         MetricNamespace: CloudTrailMetrics
@@ -79,11 +79,11 @@ Resources:
     Type: AWS::Logs::MetricFilter
     Properties:
       LogGroupName: !Ref CloudtrailLogGroupName
-      FilterPattern: |-
+      FilterPattern: '
         {
           ($.eventName = "ConsoleLogin") &&
           ($.additionalEventData.MFAUsed != "Yes")
-        }
+        }'
       MetricTransformations:
       - MetricValue: '1'
         MetricNamespace: CloudTrailMetrics
@@ -124,12 +124,12 @@ Resources:
     Type: AWS::Logs::MetricFilter
     Properties:
       LogGroupName: !Ref CloudtrailLogGroupName
-      FilterPattern: |-
+      FilterPattern: '
         {
           $.userIdentity.type = "Root" &&
           $.userIdentity.invokedBy NOT EXISTS &&
           $.eventType != "AwsServiceEvent"
-        }
+        }'
       MetricTransformations:
       - MetricValue: '1'
         MetricNamespace: CloudTrailMetrics
@@ -167,7 +167,7 @@ Resources:
     Type: AWS::Logs::MetricFilter
     Properties:
       LogGroupName: !Ref CloudtrailLogGroupName
-      FilterPattern: |-
+      FilterPattern: '
         {
           ($.eventName=DeleteGroupPolicy) ||
           ($.eventName=DeleteRolePolicy) ||
@@ -185,7 +185,7 @@ Resources:
           ($.eventName=DetachUserPolicy) ||
           ($.eventName=AttachGroupPolicy) ||
           ($.eventName=DetachGroupPolicy)
-        }
+        }'
       MetricTransformations:
       - MetricValue: '1'
         MetricNamespace: CloudTrailMetrics
@@ -223,14 +223,14 @@ Resources:
     Type: AWS::Logs::MetricFilter
     Properties:
       LogGroupName: !Ref CloudtrailLogGroupName
-      FilterPattern: |-
+      FilterPattern: '
         {
           ($.eventName = CreateTrail) ||
           ($.eventName = UpdateTrail) ||
           ($.eventName = DeleteTrail) || 
           ($.eventName = StartLogging) ||
           ($.eventName = StopLogging)
-        }
+        }'
       MetricTransformations:
       - MetricValue: '1'
         MetricNamespace: CloudTrailMetrics
@@ -270,11 +270,11 @@ Resources:
     Type: AWS::Logs::MetricFilter
     Properties:
       LogGroupName: !Ref CloudtrailLogGroupName
-      FilterPattern: |-
+      FilterPattern: '
         {
           ($.eventName = ConsoleLogin) &&
           ($.errorMessage = "Failed authentication")
-        }
+        }'
       MetricTransformations:
       - MetricValue: '1'
         MetricNamespace: CloudTrailMetrics
@@ -315,11 +315,11 @@ Resources:
     Type: AWS::Logs::MetricFilter
     Properties:
       LogGroupName: !Ref CloudtrailLogGroupName
-      FilterPattern: |-
+      FilterPattern: '
         {
           ($.eventSource = kms.amazonaws.com) &&
           (($.eventName=DisableKey) || ($.eventName=ScheduleKeyDeletion))
-        }
+        }'
       MetricTransformations:
       - MetricValue: '1'
         MetricNamespace: CloudTrailMetrics
@@ -357,7 +357,7 @@ Resources:
     Type: AWS::Logs::MetricFilter
     Properties:
       LogGroupName: !Ref CloudtrailLogGroupName
-      FilterPattern: |-
+      FilterPattern: '
         {
           ($.eventSource = s3.amazonaws.com) &&
           (($.eventName = PutBucketAcl) || 
@@ -369,7 +369,7 @@ Resources:
             ($.eventName = DeleteBucketCors) || 
             ($.eventName = DeleteBucketLifecycle) || 
             ($.eventName = DeleteBucketReplication))
-        }
+        }'
       MetricTransformations:
       - MetricValue: '1'
         MetricNamespace: CloudTrailMetrics
@@ -407,14 +407,14 @@ Resources:
     Type: AWS::Logs::MetricFilter
     Properties:
       LogGroupName: !Ref CloudtrailLogGroupName
-      FilterPattern: |-
+      FilterPattern: '
         {
           ($.eventSource = config.amazonaws.com) && 
           (($.eventName=StopConfigurationRecorder)||
            ($.eventName=DeleteDeliveryChannel)||
            ($.eventName=PutDeliveryChannel)||
            ($.eventName=PutConfigurationRecorder))
-        }
+        }'
       MetricTransformations:
       - MetricValue: '1'
         MetricNamespace: CloudTrailMetrics
@@ -452,7 +452,7 @@ Resources:
     Type: AWS::Logs::MetricFilter
     Properties:
       LogGroupName: !Ref CloudtrailLogGroupName
-      FilterPattern: |-
+      FilterPattern: '
         {
           ($.eventName = AuthorizeSecurityGroupIngress) || 
           ($.eventName = AuthorizeSecurityGroupEgress) || 
@@ -460,7 +460,7 @@ Resources:
           ($.eventName = RevokeSecurityGroupEgress) || 
           ($.eventName = CreateSecurityGroup) || 
           ($.eventName = DeleteSecurityGroup)
-        }
+        }'
       MetricTransformations:
       - MetricValue: '1'
         MetricNamespace: CloudTrailMetrics
@@ -498,7 +498,7 @@ Resources:
     Type: AWS::Logs::MetricFilter
     Properties:
       LogGroupName: !Ref CloudtrailLogGroupName
-      FilterPattern: |-
+      FilterPattern: '
         {
           ($.eventName = CreateNetworkAcl) || 
           ($.eventName = CreateNetworkAclEntry) || 
@@ -506,7 +506,7 @@ Resources:
           ($.eventName = DeleteNetworkAclEntry) || 
           ($.eventName = ReplaceNetworkAclEntry) || 
           ($.eventName = ReplaceNetworkAclAssociation)
-        }
+        }'
       MetricTransformations:
       - MetricValue: '1'
         MetricNamespace: CloudTrailMetrics
@@ -544,7 +544,7 @@ Resources:
     Type: AWS::Logs::MetricFilter
     Properties:
       LogGroupName: !Ref CloudtrailLogGroupName
-      FilterPattern: |-
+      FilterPattern: '
         {
           ($.eventName = CreateCustomerGateway) || 
           ($.eventName = DeleteCustomerGateway) || 
@@ -552,7 +552,7 @@ Resources:
           ($.eventName = CreateInternetGateway) || 
           ($.eventName = DeleteInternetGateway) || 
           ($.eventName = DetachInternetGateway)
-        }
+        }'
       MetricTransformations:
       - MetricValue: '1'
         MetricNamespace: CloudTrailMetrics
@@ -590,7 +590,7 @@ Resources:
     Type: AWS::Logs::MetricFilter
     Properties:
       LogGroupName: !Ref CloudtrailLogGroupName
-      FilterPattern: |-
+      FilterPattern: '
         {
           ($.eventName = CreateRoute) || 
           ($.eventName = CreateRouteTable) || 
@@ -599,7 +599,7 @@ Resources:
           ($.eventName = DeleteRouteTable) || 
           ($.eventName = DeleteRoute) || 
           ($.eventName = DisassociateRouteTable)
-        }
+        }'
       MetricTransformations:
       - MetricValue: '1'
         MetricNamespace: CloudTrailMetrics
@@ -637,7 +637,7 @@ Resources:
     Type: AWS::Logs::MetricFilter
     Properties:
       LogGroupName: !Ref CloudtrailLogGroupName
-      FilterPattern: |-
+      FilterPattern: '
         {
           ($.eventName = CreateVpc) || 
           ($.eventName = DeleteVpc) || 
@@ -650,7 +650,7 @@ Resources:
           ($.eventName = DetachClassicLinkVpc) || 
           ($.eventName = DisableVpcClassicLink) || 
           ($.eventName = EnableVpcClassicLink)
-        }
+        }'
       MetricTransformations:
       - MetricValue: '1'
         MetricNamespace: CloudTrailMetrics
