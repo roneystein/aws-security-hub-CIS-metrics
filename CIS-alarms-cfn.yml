@@ -82,7 +82,9 @@ Resources:
       FilterPattern: |-
         {
           ($.eventName = "ConsoleLogin") &&
-          ($.additionalEventData.MFAUsed != "Yes")
+          ($.additionalEventData.MFAUsed != "Yes") &&
+          ($.userIdentity.type = "IAMUser") &&
+          ($.responseElements.ConsoleLogin = "Success")
         }
       MetricTransformations:
       - MetricValue: '1'
@@ -97,7 +99,7 @@ Resources:
       QueryString: |-
         fields @timestamp, @message | 
           sort @timestamp desc | 
-          filter eventName == 'ConsoleLogin' and responseElements.ConsoleLogin == 'Success' and additionalEventData.MFAUsed != 'Yes'
+          filter eventName == 'ConsoleLogin' and responseElements.ConsoleLogin == 'Success' and additionalEventData.MFAUsed != 'Yes' && userIdentity.type = 'IAMUser'
 
 # ------------------------------------------------------------------------------------------------------------------------------------
 # CIS AWS Foundations Benchmark - 1.1   Avoid the use of the "root" account (Scored)
