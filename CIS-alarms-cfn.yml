@@ -99,7 +99,7 @@ Resources:
       QueryString: |-
         fields @timestamp, @message | 
           sort @timestamp desc | 
-          filter eventName == 'ConsoleLogin' and responseElements.ConsoleLogin == 'Success' and additionalEventData.MFAUsed != 'Yes' && userIdentity.type = 'IAMUser'
+          filter eventName == 'ConsoleLogin' and responseElements.ConsoleLogin == 'Success' and additionalEventData.MFAUsed != 'Yes' and userIdentity.type = 'IAMUser'
 
 # ------------------------------------------------------------------------------------------------------------------------------------
 # CIS AWS Foundations Benchmark - 1.1   Avoid the use of the "root" account (Scored)
